@@ -12,6 +12,11 @@
 #include "GPIO_Private.h"
 
 void GPIO_PinMode();
+void GPIO_SetOutputType(u8 reg,u8 pin,u8 type);
+void GPIO_SetPullType(u8 reg ,u8 pin ,u8 mode);
+void GPIO_SetOutputSpeed(u8 reg ,u8 pin ,u8 speed);
+void GPIO_DigitalWrite(u8 reg, u8 pin, u8 state);
+u8 GPIO_DigitalRead(u8 reg,u8 pin);
 
 
 

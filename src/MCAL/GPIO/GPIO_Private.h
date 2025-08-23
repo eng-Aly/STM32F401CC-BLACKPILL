@@ -31,7 +31,6 @@ typedef struct{
 #define GPIO_PORTB                  ((volatile GPIO_Memory*)(GPIO_PORTB_BASEADDRESS))
 #define GPIO_PORTC                  ((volatile GPIO_Memory*)(GPIO_PORTC_BASEADDRESS))
 
-v
 
 
 /*GPIO MODE -OPTIONS*/
@@ -44,6 +43,11 @@ v
 /*GPIO OUTPUT MODE -OPTIONS*/
 #define GPIO_OUTPUT_PUSHPULL        0
 #define GPIO_OUTPUT_OPENDRAIN       1
+
+/*GPIO PULL MODE -OPTIONS*/
+#define NOPULL                      0
+#define PULLUP                      1
+#define PULLDOWN                    2
 
 
 /*GPIO PORTS -OPTIONS*/

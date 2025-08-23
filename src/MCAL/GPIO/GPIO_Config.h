@@ -33,7 +33,11 @@
  *GPIO_OUTPUT_OPENDRAIN       1
 */
 
-
+/*GPIO PULL MODE -OPTIONS
+ * NOPULL                      0
+ * PULLUP                      1
+ * PULLDOWN                    2
+*/
 
 
 #endif

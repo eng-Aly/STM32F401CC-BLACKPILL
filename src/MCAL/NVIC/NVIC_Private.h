@@ -33,13 +33,20 @@ typedef struct{
 
 typedef enum{
 	NVIC_GROUP_16_SUB_0 = 3,
-	NVIC_GROUP_8_SUB_2 = 2,
-	NVIC_GROUP_4_SUB_4 = 1,
-	NVIC_GROUP_2_SUB_8 = 0,
+	NVIC_GROUP_8_SUB_2,
+	NVIC_GROUP_4_SUB_4,
+	NVIC_GROUP_2_SUB_8,
+	NVIC_GROUP_0_SUB_16
 }NVIC_GROUP;
 
 
 #define NVIC                  ((volatile NVIC_Memory*)(NVIC_BASE_ADDR))
+
+
+
+#define SCB_AIRCR             ((volatile u32*)(0xE000ED0C))
+
+#define VECTKEY                                0x05FA0000
 
 
 

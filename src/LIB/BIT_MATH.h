@@ -11,6 +11,14 @@
 
 
 
+#define set_mode_double_bit(reg,pin,mode)        \
+    do {                                        \
+        reg &= ~(0b11 << ((pin) * 2)); \
+        reg |=  ((mode) << ((pin) * 2)); \
+    } while(0)
+
+
+
 #define INPUT    0
 #define OUTPUT   1
 
