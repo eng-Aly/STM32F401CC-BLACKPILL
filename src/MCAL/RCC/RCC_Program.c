@@ -7,11 +7,11 @@
 
 
 #include "RCC_Interface.h"
+#include "RCC_Private.h"
 
-void MRCC_Init(){
+void RCC_Init(){
 #if RCC_SYS_CLK==HSE_CLK
 	clear_bit(RCC->CR,HSION);
-
 #if HSE_BYPASS==RC_CLK
 	set_bit(RCC->CR,HSEBYP);
 #elif HSE_BYPASS==MECHANICAL_CLK
@@ -38,4 +38,22 @@ void MRCC_Init(){
 }
 
 
-void MRCC_Enable(u8 A_BusID , u8 A ){}
+
+
+void RCC_Enable(u8 bus ,u8 peripheral){
+	switch(bus){
+	case RCC_AHB1:
+		switch(peripheral){
+		case RCC_GPIOA:
+			set_bit(RCC->AHB1ENR,GPIOAEN);
+			break;
+		case RCC_GPIOB:
+			set_bit(RCC->AHB1ENR,GPIOBEN);
+			break;
+		default:
+			break;
+		}
+	case RCC_AHB2:
+		break;
+	}
+}

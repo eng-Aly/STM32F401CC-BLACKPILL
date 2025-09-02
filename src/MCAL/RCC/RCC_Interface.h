@@ -13,10 +13,11 @@
 #include "RCC_Private.h"
 #include "RCC_Config.h"
 
-#define RCC (*volatile RCC_Memory*(0x40023800))
 
-void MRCC_Init();
 
+
+void RCC_Init();
+void RCC_Enable(u8 bus ,u8 peripheral);
 
 
 

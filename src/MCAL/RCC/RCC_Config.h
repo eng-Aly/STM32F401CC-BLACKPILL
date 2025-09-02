@@ -17,9 +17,25 @@
 
 
 /* HSE_BYPASS -OPTIONS
-    RC_CLK                0
-    MECHANICAL_CLK        1
+ RC_CLK                0
+ MECHANICAL_CLK        1
  */
 #define HSE_BYPASS        RC_CLK
 
+/* BUSSES      -OPTIONS
+ RCC_AHB1             0
+ RCC_AHB2             1
+ RCC_APB1             2
+ RCC_APB2             3
+ */
+
+/* PERIPHERALS   -OPTIONS
+ RCC_GPIOA           0
+ RCC_GPIOB           1
+ */
+
+
 #endif /* RCC_CONFIG_H_ */
+
+
+

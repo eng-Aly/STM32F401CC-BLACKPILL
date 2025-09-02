@@ -9,7 +9,7 @@
 #define RCC_PRIVATE_H_
 
 //RCC Memory Mapping
-typedef struct RCC_Memory{
+typedef struct{
 	u32 CR;
 	u32 PLLCFGR;
 	u32 CFGR;
@@ -43,10 +43,14 @@ typedef struct RCC_Memory{
 	u32 reserved13;
 	u32 reserved14;
 	u32 SSCGR;
-	u32 CFGR;
 	u32 reserved15;
 	u32 DCKCFGR;
-} RCC_Memory;
+}RCC_Memory;
+
+#define RCC_BASE_ADDR 		0x40023800U
+#define RCC 	   ((volatile RCC_Memory*)(RCC_BASE_ADDR))
+
+
 
 
 //RCC_SYS_CLK -OPTIONS
@@ -57,6 +61,20 @@ typedef struct RCC_Memory{
 //HSE_BYPASS  -OPTIONS
 #define RC_CLK               0
 #define MECHANICAL_CLK       1
+
+//BUSSES      -OPTIONS
+#define RCC_AHB1             0
+#define RCC_AHB2             1
+#define RCC_APB1             2
+#define RCC_APB2             3
+
+
+//PERIPHERALS  -OPTIONS
+#define  RCC_GPIOA           0
+#define  RCC_GPIOB           1
+
+#define GPIOAEN              0
+#define GPIOBEN              1
 
 
 //RC CR bits
