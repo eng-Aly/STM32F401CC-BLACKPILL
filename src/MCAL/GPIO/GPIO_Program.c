@@ -71,6 +71,7 @@ void GPIO_SetOutputType(u8 reg,u8 pin,u8 type){
 	}
 }
 
+
 void GPIO_SetPullType(u8 reg ,u8 pin ,u8 mode){
 	if ((reg == PORTA) & (pin == 13 | pin == 14 | pin ==15)){
 		break;
@@ -131,39 +132,27 @@ void GPIO_DigitalWrite(u8 reg, u8 pin, u8 state) {
 	}
 	switch (reg) {
 		case PORTA:
-			switch (state) {
-				case LOW:
-					set_bit(GPIO_PORTB->BSRR,pin+15);
-					break;
-				case HIGH:
-					set_bit(GPIO_PORTA->BSRR,pin);
-					break;
-				default:
-					break;	
+			if(state==LOW){
+				set_bit(GPIO_PORTA->BSRR,pin+15);
+			}
+			else if(state==HIGH){
+				set_bit(GPIO_PORTA->BSRR,pin);
 			}
 			break;
 		case PORTB:
-			switch (state) {
-				case LOW:
-					set_bit(GPIO_PORTB->BSRR,pin+15);
-					break;
-				case HIGH:
-					set_bit(GPIO_PORTB->BSRR,pin);
-					break;
-				default:
-					break;	
+			if(state==LOW){
+				set_bit(GPIO_PORTB->BSRR,pin+15);
+			}
+			else if(state==HIGH){
+				set_bit(GPIO_PORTB->BSRR,pin);
 			}
 			break;
 		case PORTC:
-			switch (state) {
-				case LOW:
-					set_bit(GPIO_PORTB->BSRR,pin+15);
-					break;
-				case HIGH:
-					set_bit(GPIO_PORTB->BSRR,pin);
-					break;
-				default:
-					break;	
+			if(state==LOW){
+				set_bit(GPIO_PORTC->BSRR,pin+15);
+			}
+			else if(state==HIGH){
+				set_bit(GPIO_PORTC->BSRR,pin);
 			}
 			break;
 		default:
@@ -173,11 +162,11 @@ void GPIO_DigitalWrite(u8 reg, u8 pin, u8 state) {
 
 u8 GPIO_DigitalRead(u8 reg,u8 pin){
 	if ((reg == PORTA) & (pin == 13 | pin == 14 | pin ==15)){
-		return -1;
+		return ERROR;
 		break;
 	}
 	if ((reg == PORTB) & (pin == 4 | pin ==3)){
-		return -1;
+		return ERROR;
 		break;
 	}
 	switch (reg){
@@ -191,7 +180,56 @@ u8 GPIO_DigitalRead(u8 reg,u8 pin){
 		return get_bit(GPIO_PORTC->IDR,pin);
 		break;
 	default:
-		return -1;
+		return ERROR;
 		break;
 	}
+}
+
+void GPIO_SetAlternateFunc(u8 reg, u8 pin ,u8 AltFunc){
+	if(pin<8){
+		switch(reg){
+		case PORTA:
+			GPIO_PORTA->AFRL &= ~(0b1111<<pin*4);
+			GPIO_PORTA->AFRL |= (AltFunc<<pin*4);
+			break;
+		case PORTB:
+			GPIO_PORTB->AFRL &= ~(0b1111<<pin*4);
+			GPIO_PORTB->AFRL |= (AltFunc<<pin*4);
+			break;
+		case PORTC:
+			GPIO_PORTC->AFRL &= ~(0b1111<<pin*4);
+			GPIO_PORTC->AFRL |= (AltFunc<<pin*4);
+			break;
+		default:
+			break;
+		}
+	}
+	else if (pin>=8 && pin<16){
+		switch(reg){
+		case PORTA:
+			GPIO_PORTA->AFRH &= ~(0b1111<<(pin-8)*4);
+			GPIO_PORTA->AFRH |= (AltFunc<<(pin-8)*4);
+			break;
+		case PORTB:
+			GPIO_PORTB->AFRH &= ~(0b1111<<(pin-8)*4);
+			GPIO_PORTB->AFRH |= (AltFunc<<(pin-8)*4);
+			break;
+		case PORTC:
+			GPIO_PORTC->AFRH &= ~(0b1111<<(pin-8)*4);
+			GPIO_PORTC->AFRH |= (AltFunc<<(pin-8)*4);
+			break;
+		default:
+			break;
+		}
+
+	}
+}
+
+
+void GPIO_Init(GPIO_PINConfig PIN){
+	GPIO_PinMode(PIN->Port,PIN->Pin,  PIN->Mode);
+	GPIO_SetOutputType(PIN->Port,PIN->Pin,PIN->OutputType);
+	GPIO_SetPullType(PIN->Port,PIN->Pin,PIN->Pulltype);
+	GPIO_SetOutputSpeed(PIN->Port,PIN->Pin,PIN->Speed);
+	GPIO_SetAlternateFunc(PIN->Port,PIN->Pin,PIN->AltFunc);
 }

@@ -1,9 +1,11 @@
 /*
  * RCC_Program.c
  *
- *  Created on: Aug 17, 2025
+ *  Created on: Sep 5, 2025
  *      Author: JETT
  */
+
+
 
 
 #include "RCC_Interface.h"
@@ -17,9 +19,10 @@ void RCC_Init(){
 #elif HSE_BYPASS==MECHANICAL_CLK
 	clear_bit(RCC->CR,HSEBYP);
 #endif
-	set_bit(RCC->CR,HSEBYP);
-	while(get_bit(RCC->CR,HSERDY)==0);
-	clear_bit(RCC->CFGR,HSERDY);
+	set_bit(RCC->CR,16);
+	while(get_bit(RCC->CR,17)==0);
+	clear_bit(RCC->CFGR, 1);
+	set_bit(RCC->CFGR, 0);
 
 
 #elif RCC_SYS_CLK==HSI_CLK
@@ -33,7 +36,7 @@ void RCC_Init(){
 	set_bit(RCC->CR,PLION);
 
 
-#endif	
+#endif
 
 }
 
@@ -52,8 +55,20 @@ void RCC_Enable(u8 bus ,u8 peripheral){
 			break;
 		default:
 			break;
+
 		}
+		set_bit(RCC->AHB1ENR,peripheral);
+		break;
 	case RCC_AHB2:
+		set_bit(RCC->AHB2ENR,peripheral);
+		break;
+	case RCC_APB1:
+		set_bit(RCC->APB1ENR,peripheral);
+		break;
+	case RCC_APB2:
+		set_bit(RCC->APB2ENR,peripheral);
 		break;
 	}
 }
+
+

@@ -16,8 +16,9 @@ void GPIO_SetOutputType(u8 reg,u8 pin,u8 type);
 void GPIO_SetPullType(u8 reg ,u8 pin ,u8 mode);
 void GPIO_SetOutputSpeed(u8 reg ,u8 pin ,u8 speed);
 void GPIO_DigitalWrite(u8 reg, u8 pin, u8 state);
+void GPIO_SetAlternateFunc(u8 reg, u8 pin ,u8 AltFunc);
 u8 GPIO_DigitalRead(u8 reg,u8 pin);
-
+void GPIO_Init(GPIO_PINConfig PIN);
 
 
 

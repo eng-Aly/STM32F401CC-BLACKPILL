@@ -44,6 +44,12 @@ typedef struct{
 #define GPIO_OUTPUT_PUSHPULL        0
 #define GPIO_OUTPUT_OPENDRAIN       1
 
+/*GPIO SPEED MODE -OPTIONS*/
+#define LOW_SPEED                   0
+#define MEDIUM_SPEED                1
+#define HIGH_SPEED                  2
+#define VHIGH_SPEED                 3
+
 /*GPIO PULL MODE -OPTIONS*/
 #define NOPULL                      0
 #define PULLUP                      1
@@ -54,6 +60,17 @@ typedef struct{
 #define PORTA                       0
 #define PORTB                       1
 #define PORTC                       2
+
+typedef struct{
+	u8 Port;
+	u8 Pin;
+	u8 Mode;
+	u8 OutputType;
+	u8 Speed;
+	u8 Pulltype;
+	u8 AltFunc;
+}GPIO_PINConfig;
+
 
 
 #endif /* MCAL_GPIO_GPIO_PRIVATE_H_ */

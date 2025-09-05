@@ -25,8 +25,7 @@
 
 #define HIGH                                               1
 #define LOW                                                0
-
-
+#define ERROR                                              0xFF
 
 /* GPIO OUTPUT MODE OPTIONS
  *GPIO_OUTPUT_PUSHPULL        0
